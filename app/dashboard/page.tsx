@@ -1,3 +1,5 @@
+"use client"
+
 import { AppSidebar } from "@/components/app-sidebar"
 import {
   Breadcrumb,
@@ -13,11 +15,33 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
+import * as React from "react"
+
+// Placeholder components for your content
+function WorkingExperienceContent() {
+  return (
+    <div>
+      <h1 className="text-2xl font-bold">Working Experience</h1>
+      <p className="mt-4">Details about your working experience...</p>
+    </div>
+  )
+}
+
+function RealEstatePlatformContent() {
+  return (
+    <div>
+      <h1 className="text-2xl font-bold">Real Estate Platform</h1>
+      <p className="mt-4">Details about your real estate project...</p>
+    </div>
+  )
+}
 
 export default function Page() {
+  const [activeContent, setActiveContent] = React.useState("Working experience")
+
   return (
     <SidebarProvider>
-      <AppSidebar />
+      <AppSidebar onActiveItemChange={setActiveContent} />
       <SidebarInset>
         <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
           <SidebarTrigger className="-ml-1" />
@@ -39,13 +63,13 @@ export default function Page() {
             </BreadcrumbList>
           </Breadcrumb>
         </header>
-        <div className="flex flex-1 flex-col gap-4 p-4">
-          <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-            <div className="bg-muted/50 aspect-video rounded-xl" />
-            <div className="bg-muted/50 aspect-video rounded-xl" />
-            <div className="bg-muted/50 aspect-video rounded-xl" />
-          </div>
-          <div className="bg-muted/50 min-h-[100vh] flex-1 rounded-xl md:min-h-min" />
+        <div className="flex">
+          <main className="flex-1 p-6">
+            {activeContent === "Working experience" && <WorkingExperienceContent />}
+            {activeContent === "Real estate platform" && (
+              <RealEstatePlatformContent />
+            )}
+          </main>
         </div>
       </SidebarInset>
     </SidebarProvider>

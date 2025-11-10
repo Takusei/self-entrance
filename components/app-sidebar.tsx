@@ -41,12 +41,24 @@ const data = {
   ],
 }
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
+  onActiveItemChange?: (activeItem: string) => void
+}
+
+export function AppSidebar({
+  onActiveItemChange,
+  ...props
+}: AppSidebarProps) {
   const initialActiveItem =
     data.navMain
       .flatMap((group) => group.items)
       .find((item) => item.isActive)?.title || ""
   const [activeItem, setActiveItem] = React.useState(initialActiveItem)
+
+  const handleItemClick = (title: string) => {
+    setActiveItem(title)
+    onActiveItemChange?.(title)
+  }
 
   return (
     <Sidebar {...props}>
@@ -62,7 +74,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                     <SidebarMenuButton
                       asChild
                       isActive={activeItem === subItem.title}
-                      onClick={() => setActiveItem(subItem.title)}
+                      onClick={() => handleItemClick(subItem.title)}
                     >
                       <a href={subItem.url}>{subItem.title}</a>
                     </SidebarMenuButton>
