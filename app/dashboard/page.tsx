@@ -1,6 +1,7 @@
 "use client"
 
 import { AppSidebar } from "@/components/app-sidebar"
+import { HackerNewsTrending } from "@/components/trending"
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -18,7 +19,7 @@ import {
 import * as React from "react"
 
 // Placeholder components for your content
-function WorkingExperienceContent() {
+const WorkingExperienceContent = () => {
   return (
     <div>
       <h1 className="text-2xl font-bold">Working Experience</h1>
@@ -27,7 +28,7 @@ function WorkingExperienceContent() {
   )
 }
 
-function RealEstatePlatformContent() {
+const RealEstatePlatformContent = () => {
   return (
     <div>
       <h1 className="text-2xl font-bold">Real Estate Platform</h1>
@@ -69,6 +70,7 @@ export default function Page() {
             {activeContent === "Real estate platform" && (
               <RealEstatePlatformContent />
             )}
+            {activeContent === "Hacker news trending" && <HackerNewsTrending />}
           </main>
         </div>
       </SidebarInset>

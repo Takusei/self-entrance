@@ -36,8 +36,13 @@ const data = {
           url: "#",
           isActive: false,
         },
+        {
+          title: "Hacker news trending",
+          url: "#",
+          isActive: false,
+        }
       ],
-    },
+    }
   ],
 }
 
